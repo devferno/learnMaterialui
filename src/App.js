@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import { CssBaseline, Drawer } from "@material-ui/core";
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import Layout from "./components/Layout";
+import { createTheme, ThemeProvider, Typography } from "@material-ui/core";
+import {
+  lightBlue,
+  deepPurple,
+  blueGrey,
+  grey,
+} from "@material-ui/core/colors";
+import Cards from "./components/Cards";
+import MyTable from "./components/Table";
 
-function App() {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#0277bd",
+    },
+    secondary: {
+      main: "#ffa000",
+    },
+    background: {
+      default: "#dde9f5",
+    },
+  },
+});
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>
+          <Switch>
+            <Route component={MyTable} path="/setting" />
+            <Route component={Cards} path="/" />
+          </Switch>
+        </Layout>
+      </ThemeProvider>
+    </Router>
   );
-}
-
+};
 export default App;
